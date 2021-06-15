@@ -6,17 +6,19 @@ public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
     private DialogueHistory currentDialogue;
+    [SerializeField] private float delayLetter = 0.03f;
     private bool endCurrentTalker = true;
     private bool buttonClicked = false;
-    public static event Action<Dialogue> onNewTalker;
+    public static event Action<Dialogue, Action> onNewTalker;
     public static event Action onResetText;
     public static event Action<string> onShowMessage;
     public static event Action<bool> onUIState;
     public static event Action onEnd;
+    public static event Action<bool> onNext;
 
     void Awake() 
     {
-        instance = this;
+        instance = this;    
     }
 
     public void ButtonWasClicked() =>
@@ -27,19 +29,22 @@ public class DialogueManager : MonoBehaviour
         currentDialogue = dialogue;
         StartCoroutine(StartDialogue());
         onUIState?.Invoke(true);
+        onNext?.Invoke(false);
     }
 
     IEnumerator StartDialogue()
     {
         for(int i = 0; i < currentDialogue.dialogue.Length; i++)
         {
+            bool endNewTalker = false;
+            onNext?.Invoke(false);
             onResetText?.Invoke();
-            onNewTalker?.Invoke(currentDialogue.dialogue[i]);
+            onNewTalker?.Invoke(currentDialogue.dialogue[i], () => endNewTalker = true);
+            yield return new WaitUntil(() => endNewTalker);
             StartCoroutine(ShowDialogue(currentDialogue.dialogue[i].messages));
             yield return new WaitUntil(() => endCurrentTalker);
         }
 
-        currentDialogue = null;
         onUIState?.Invoke(false);
         onEnd?.Invoke();
     }
@@ -50,17 +55,26 @@ public class DialogueManager : MonoBehaviour
 
         foreach(var message in messages)
         {
-            ShowAllMessage(message);
-
+            onNext?.Invoke(false);
+            StartCoroutine(ShowAllMessage(message));
             yield return new WaitUntil(() => buttonClicked);
         }
 
         endCurrentTalker = true;
     }
 
-    void ShowAllMessage(string message)
+    IEnumerator ShowAllMessage(string message)
     {
-        onShowMessage?.Invoke(message);
         buttonClicked = false;
+        string current = string.Empty;
+
+        for(int i = 0; i < message.Length; i++)
+        {
+            yield return new WaitForSeconds(delayLetter);
+            current += message[i];
+            onShowMessage?.Invoke(current);
+        }
+
+        onNext?.Invoke(true);
     }
 }

@@ -133,7 +133,6 @@ GameObject:
   - component: {fileID: 260354068}
   - component: {fileID: 260354067}
   - component: {fileID: 260354066}
-  - component: {fileID: 260354069}
   m_Layer: 5
   m_Name: Next
   m_TagString: Untagged
@@ -184,9 +183,9 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.85490197, g: 0.7294118, b: 0.5686275, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.6509804, g: 0.6509804, b: 0.6509804, a: 0}
+    m_DisabledColor: {r: 0, g: 0, b: 0, a: 0}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0.15
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -251,25 +250,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260354064}
   m_CullTransparentMesh: 0
---- !u!95 &260354069
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 260354064}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4ecb9a4cee8513940a8849e017c2cf44, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &317258207
 GameObject:
   m_ObjectHideFlags: 0
@@ -596,7 +576,7 @@ GameObject:
   m_Layer: 0
   m_Name: DialogueManager
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -612,7 +592,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &548101687
 MonoBehaviour:
@@ -626,6 +606,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af81c1de2dabef42bf8d67f554ef35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delayLetter: 0.03
 --- !u!1 &584309407
 GameObject:
   m_ObjectHideFlags: 0
@@ -1259,8 +1240,7 @@ MonoBehaviour:
   dialogueText: {fileID: 317258209}
   characterImage: {fileID: 645774123}
   conteinerDialogue: {fileID: 1532528195}
-  nextButton: {fileID: 260354065}
-  sizeEnd: {x: 0, y: 0}
+  next: {fileID: 260354066}
 --- !u!4 &1299219796
 Transform:
   m_ObjectHideFlags: 0
@@ -1273,7 +1253,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1532528195
 GameObject:

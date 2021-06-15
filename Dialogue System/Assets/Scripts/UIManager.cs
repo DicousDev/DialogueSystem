@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -9,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     [SerializeField] private Image characterImage;
     [SerializeField] private GameObject conteinerDialogue;
+    [SerializeField] private Button next;
     private Vector3 positionCharacterStart;
 
     void OnEnable() 
@@ -16,6 +18,7 @@ public class UIManager : MonoBehaviour
         DialogueManager.onNewTalker += NewTalker;
         DialogueManager.onShowMessage += ShowText;
         DialogueManager.onResetText += ResetText;
+        DialogueManager.onNext += NextState;
         DialogueManager.onUIState += UIState;
     }
 
@@ -25,6 +28,7 @@ public class UIManager : MonoBehaviour
         DialogueManager.onShowMessage -= ShowText;
         DialogueManager.onResetText -= ResetText;
         DialogueManager.onUIState -= UIState;
+        DialogueManager.onNext -= NextState;
     }
 
     void Awake() 
@@ -33,13 +37,13 @@ public class UIManager : MonoBehaviour
         positionCharacterStart = characterImage.rectTransform.localPosition;
     }
 
-    void NewTalker(Dialogue talker)
+    void NewTalker(Dialogue talker, Action end)
     {
         characterImage.sprite = talker.talker.sprite;
         nameText.text = talker.talker.name;
 
         characterImage.rectTransform.localPosition = positionCharacterStart;
-        LeanTween.moveX(characterImage.rectTransform, 0, 0.6f).setEase(LeanTweenType.easeSpring);
+        LeanTween.moveX(characterImage.rectTransform, 0, 0.6f).setEase(LeanTweenType.easeSpring).setOnComplete(end);
     }
 
     void ShowText(string message) =>
@@ -50,5 +54,8 @@ public class UIManager : MonoBehaviour
 
     void UIState(bool state) =>
         conteinerDialogue.SetActive(state);
+
+    void NextState(bool state) =>
+        next.interactable = state;
 
 }
