@@ -9,19 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8431c07c1801b934eb37299c1d9b4565, type: 3}
-  m_Name: Message
+  m_Script: {fileID: 11500000, guid: e976f6938f7d41c47ac070a404b0c0c6, type: 3}
+  m_Name: Dialogue
   m_EditorClassIdentifier: 
   dialogue:
   - talker: {fileID: 11400000, guid: 408717b30a732cd40a810d11ef60d181, type: 2}
     messages:
-    - "Voc\xEA est\xE1 me desafiando ?"
+    - Lorem Impsum Lorem Impsum Lorem Impsum
   - talker: {fileID: 11400000, guid: 471e7c6d2307a1348a2a5d17bdc0104e, type: 2}
     messages:
-    - "Voc\xEA acha que pode me vencer ?"
-    - Hhahahahha.... Eu sou muito mais forte!!
-    - Eu vou vencer!
+    - Lorem Impsum
   - talker: {fileID: 11400000, guid: 408717b30a732cd40a810d11ef60d181, type: 2}
     messages:
-    - "Voc\xEA est\xE1 me subestimando....\nHahahhahha...."
-    - Mostrarei o meu poder!!
+    - Lorem Impsum Lorem Impsum Lorem Impsum
